@@ -55,7 +55,6 @@ class App extends Component {
       const resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${desLoc}&key=YOUR_API_KEY`)
       const respJson = await resp.json();
       const response = respJson.routes[0];
-      // console.log(respJson);
       const distanceTime = response.legs[0];
       const distance = distanceTime.distance.text;
       const time = distanceTime.duration.text;
@@ -66,19 +65,19 @@ class App extends Component {
           longitude: point[1]
         }
       })
-      this.setState({ coords, distance, time })
+      this.setState({ coords, distance, time });
     } catch(error) {
-      console.log('Error: ', error)
+      console.log('Error: ', error);
     }
   }
 
   onMarkerPress = location => () => {
-    const { coords: { latitude, longitude } } = location
+    const { coords: { latitude, longitude } } = location;
     this.setState({
       destination: location,
       desLatitude: latitude,
       desLongitude: longitude
-    }, this.mergeCoords)
+    }, this.mergeCoords);
   }
 
   renderMarkers = () => {
@@ -89,7 +88,7 @@ class App extends Component {
           locations.map((location, idx) => {
             const {
               coords: { latitude, longitude }
-            } = location
+            } = location;
             return (
               <Marker
                 key={idx}
@@ -112,8 +111,6 @@ class App extends Component {
       longitude,
       destination
     } = this.state
-    // console.log(latitude);
-    // console.log(longitude);
 
     if (latitude) {
       return (
